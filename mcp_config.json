@@ -1,0 +1,25 @@
+{
+  "mcpServers": {},
+  "pluginMetadata": {
+    "mcp-github-com-github-github-mcp-server": {
+      "author": "what-my-names",
+      "connectionType": "httpStream",
+      "description": "GitHub 官方远端 MCP Server（46 个工具：仓库/Issue/PR/代码搜索/Release/密钥扫描）",
+      "disabled": false,
+      "endpoint": "https://api.githubcopilot.com/mcp/",
+      "bearerToken": "<YOUR_GITHUB_PAT>",
+      "headers": {},
+      "id": "mcp-github-com-github-github-mcp-server",
+      "installedPath": "/storage/emulated/0/Download/Operit/mcp_plugins/mcp-github-com-github-github-mcp-server",
+      "installedTime": 1790912237125,
+      "isInstalled": true,
+      "logoUrl": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "longDescription": "GitHub 官方远程 MCP 服务器。连接 https://api.githubcopilot.com/mcp/，用 GitHub Personal Access Token 鉴权（Authorization: Bearer <PAT>）。覆盖仓库管理、文件读写、Issue/子 Issue、Pull Request 与评审、代码/提交/仓库搜索、Release 与 Tag、团队与成员、密钥扫描等 46 个工具。安装后只需把 bearerToken 换成自己的 PAT 即可使用。",
+      "name": "GitHub",
+      "repoUrl": "https://github.com/github/github-mcp-server",
+      "type": "remote",
+      "updatedAt": "2026-10-02T00:00:00Z",
+      "version": "1.0.0"
+    }
+  }
+}
