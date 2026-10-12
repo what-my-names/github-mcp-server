@@ -13,10 +13,34 @@
 
 ## 安装步骤
 
-1. 在 Operit 市场安装本插件（或手动把 `mcp_config.json` 内容合并进 `mcp_config.json`）
-2. 把配置里的 `bearerToken` 占位符 `<YOUR_GITHUB_PAT>` 换成你自己的 GitHub Personal Access Token
-3. 重启 MCP 服务
-4. 验证：让 AI 执行 `get_me`，能返回你的账号信息即成功
+**方式 A——市场一键安装（推荐）**
+
+1. 在 Operit 市场安装本插件（内部走标准配置导入）
+2. 打开插件 `github_mcp` → 编辑 → 远程连接里确认 endpoint：`https://api.githubcopilot.com/mcp/`
+3. 在 **Bearer Token** 里填自己的 GitHub PAT（`<YOUR_GITHUB_PAT>` 是占位符，不能直接用）
+4. 重启 MCP 服务 → 让 AI 执行 `get_me`，能返回你的账号信息即成功
+
+**方式 B——手动合并配置**
+
+1. 把本仓 `mcp_config.json` 的 `pluginMetadata` 条目合并进你本机的
+   `Download/Operit/mcp_plugins/mcp_config.json`
+2. 同时建目录 `mcp_plugins/github_mcp/`（空目录也行）
+3. 把 `bearerToken` 的占位符换成自己的 PAT，重启 MCP 服务
+
+> 两种方式都只需替换占位符。仓库内**不含任何真实令牌**。
+
+## 配置文件说明
+
+| 文件 | 用途 | 格式 |
+|---|---|---|
+| `market_install_config.json` | 市场发布 / App 内「从 JSON 导入」 | 标准 MCP：根节点 `mcpServers`，远端项用 `type: streamable_http` + `url` |
+| `mcp_config.json` | 手动合并进本机配置 | Operit 本地文件格式：`pluginMetadata` 条目 |
+
+⚠️ 两个容易踩的点（源码实证）：
+
+- 市场/导入路径**只解析 `mcpServers`**，写成空的会报「mcpServers 不能为空」；
+- 导入时 `bearerToken` 会被清空，鉴权头以 `headers` 为准——所以仓库里的标准配置
+  `headers` 故意留空，避免占位符盖掉你在界面里填的真 Token。
 
 ## 生成 PAT
 
@@ -51,6 +75,7 @@
 | 401 | Token 过期或已撤销，重新生成 |
 | 403 | 权限不足，给 token 加上 Contents / Issues / Pull requests |
 | 重启后插件看不见 | 需存在目录 `mcp_plugins/<id>/`，且条目补齐 installedPath / installedTime / logoUrl / longDescription / updatedAt 字段 |
+| 安装时报「mcpServers 不能为空」 | 旧版市场配置只写了 `pluginMetadata`；应从市场安装最新版本，或用 `market_install_config.json` 导入 |
 
 ## 安全声明
 
